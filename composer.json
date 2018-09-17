@@ -1,0 +1,20 @@
+{
+    "name": "polarizedions/thallium",
+    "description": "Simple php framework for myself for learning purposes",
+    "type": "project",
+    "require": {
+        "filp/whoops": "^2.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PolarizedIons",
+            "email": "PolarizedIons@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PolarizedIons\\Thallium\\": "src/"
+        }
+    }
+}
