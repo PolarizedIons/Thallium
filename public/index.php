@@ -10,4 +10,14 @@ define('THALLIUM_SRC', realpath(THALLIUM_ROOT . DIRECTORY_SEPARATOR . 'src'));
 require_once THALLIUM_SRC . '/bootstrap.php';
 
 use \PolarizedIons\Thallium\Core\Thallium;
-new Thallium;
+$app = Thallium::init();
+
+$app->get('/', function($req, $res) {
+    echo 'hello index!';
+});
+
+$app->get('/about', function($req, $res) {
+    echo 'hello about!';
+});
+
+$app->run();
