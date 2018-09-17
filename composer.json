@@ -2,9 +2,6 @@
     "name": "polarizedions/thallium",
     "description": "Simple php framework for myself for learning purposes",
     "type": "project",
-    "require": {
-        "filp/whoops": "^2.2"
-    },
     "license": "MIT",
     "authors": [
         {
@@ -12,9 +9,18 @@
             "email": "PolarizedIons@gmail.com"
         }
     ],
+    "require": {
+        "filp/whoops": "^2.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    },
     "autoload": {
         "psr-4": {
             "PolarizedIons\\Thallium\\": "src/"
         }
+    },
+    "scripts": {
+        "test": "phpunit --bootstrap vendor/autoload.php --testdox tests"
     }
 }
