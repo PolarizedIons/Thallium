@@ -14,18 +14,22 @@ class Thallium {
         return self::$core;
     }
 
+    public static function core(): ICore {
+        return self::$core->fetch('core');
+    }
+
     public static function manage(string $key, $component) {
-        self::$core->manage($key, $component);
+        self::core()->manage($key, $component);
     }
 
     public static function fetch($key)
     {
-        return self::$core->fetch($key);
+        return self::core()->fetch($key);
     }
 
 
     public static function router(): IRouter {
-        return self::$core->router();
+        return self::core()->router();
     }
 
     public function get($route, $callback): IRoute {
