@@ -20,4 +20,12 @@ $app->get('/about', function($req, $res) {
     echo 'hello about!';
 });
 
+$app->get('/hello/{name}', function($req, $res) {
+    echo 'Hello ' . $req->params['name'];
+});
+
+$app->get('/item/{num#number}', function($req, $res) {
+    echo 'Item ' . $req->params['num'];
+});
+
 $app->run();

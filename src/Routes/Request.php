@@ -9,6 +9,7 @@ if (!defined('THALLIUM')) exit(1);
 class Request implements IRequest {
     public $method;
     public $path;
+    public $params = array();
 
     public function __construct($method, $path)
     {
