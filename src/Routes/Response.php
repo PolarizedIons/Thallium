@@ -1,7 +1,7 @@
 <?php
-namespace PolarizedIons\Thallium\Routes;
+namespace Thallium\Routes;
 
-use \PolarizedIons\Thallium\Interfaces\IResponse;
+use \Thallium\Interfaces\IResponse;
 
 if (!defined('THALLIUM')) exit(1);
 

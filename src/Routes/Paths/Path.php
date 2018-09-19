@@ -1,11 +1,11 @@
 <?php
-namespace PolarizedIons\Thallium\Routes\Paths;
+namespace Thallium\Routes\Paths;
 
-use \PolarizedIons\Thallium\Interfaces\IRequest;
-use \PolarizedIons\Thallium\Routes\Paths\ArgParser;
-use \PolarizedIons\Thallium\Routes\Paths\Parsers\StaticArg;
-use \PolarizedIons\Thallium\Routes\Paths\Parsers\CaptureArg;
-use \PolarizedIons\Thallium\Routes\Paths\Parsers\NumberArg;
+use \Thallium\Interfaces\IRequest;
+use \Thallium\Routes\Paths\ArgParser;
+use \Thallium\Routes\Paths\Parsers\StaticArg;
+use \Thallium\Routes\Paths\Parsers\CaptureArg;
+use \Thallium\Routes\Paths\Parsers\NumberArg;
 
 
 if (!defined('THALLIUM')) exit(1);

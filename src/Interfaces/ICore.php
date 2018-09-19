@@ -1,5 +1,5 @@
 <?php
-namespace PolarizedIons\Thallium\Interfaces;
+namespace Thallium\Interfaces;
 
 if (!defined('THALLIUM')) exit(1);
 

@@ -1,10 +1,10 @@
 <?php
-namespace PolarizedIons\Thallium\Core;
+namespace Thallium\Core;
 
-use PolarizedIons\Thallium\Core\Core;
-use PolarizedIons\Thallium\Interfaces\ICore;
-use PolarizedIons\Thallium\Interfaces\IRoute;
-use PolarizedIons\Thallium\Interfaces\IRouter;
+use Thallium\Core\Core;
+use Thallium\Interfaces\ICore;
+use Thallium\Interfaces\IRoute;
+use Thallium\Interfaces\IRouter;
 
 
 if (!defined('THALLIUM')) exit(1);

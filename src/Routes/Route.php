@@ -1,11 +1,11 @@
 <?php
-namespace PolarizedIons\Thallium\Routes;
+namespace Thallium\Routes;
 
-use \PolarizedIons\Thallium\Core\Thallium;
-use \PolarizedIons\Thallium\Interfaces\IRoute;
-use \PolarizedIons\Thallium\Interfaces\IRequest;
-use \PolarizedIons\Thallium\Interfaces\IResponse;
-use \PolarizedIons\Thallium\Routes\Paths\Path;
+use \Thallium\Core\Thallium;
+use \Thallium\Interfaces\IRoute;
+use \Thallium\Interfaces\IRequest;
+use \Thallium\Interfaces\IResponse;
+use \Thallium\Routes\Paths\Path;
 
 
 if (!defined('THALLIUM')) exit(1);

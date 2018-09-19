@@ -7,7 +7,7 @@ define('THALLIUM_SRC', realpath(__DIR__ . '/../src'));
 
 require_once '../vendor/autoload.php';
 
-use \PolarizedIons\Thallium\Core\Thallium;
+use \Thallium\Core\Thallium;
 $app = Thallium::init();
 
 $app->get('/', function($req, $res) {

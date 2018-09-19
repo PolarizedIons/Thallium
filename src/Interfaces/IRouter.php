@@ -1,9 +1,9 @@
 <?php
-namespace PolarizedIons\Thallium\Interfaces;
+namespace Thallium\Interfaces;
 
-use PolarizedIons\Thallium\Interfaces\IRouter;
-use PolarizedIons\Thallium\Interfaces\IRequest;
-use PolarizedIons\Thallium\Interfaces\IResponse;
+use Thallium\Interfaces\IRouter;
+use Thallium\Interfaces\IRequest;
+use Thallium\Interfaces\IResponse;
 
 
 if (!defined('THALLIUM')) exit(1);

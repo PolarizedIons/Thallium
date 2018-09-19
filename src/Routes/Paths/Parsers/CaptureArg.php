@@ -1,7 +1,7 @@
 <?php
-namespace PolarizedIons\Thallium\Routes\Paths\Parsers;
+namespace Thallium\Routes\Paths\Parsers;
 
-use PolarizedIons\Thallium\Routes\Paths\ArgParser;
+use Thallium\Routes\Paths\ArgParser;
 
 
 if (!defined('THALLIUM')) exit(1);

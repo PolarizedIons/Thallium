@@ -1,5 +1,5 @@
 <?php
-namespace PolarizedIons\Thallium\Routes\Paths;
+namespace Thallium\Routes\Paths;
 
 
 if (!defined('THALLIUM')) exit(1);
