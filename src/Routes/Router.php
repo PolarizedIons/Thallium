@@ -44,6 +44,10 @@ class Router implements IRouter {
         return $this->create('DELETE', $path, $callback);
     }
 
+    public function patch(string $path, $callback): IRoute {
+        return $this->create('PATCH', $path, $callback);
+    }
+
     public function option(string $path, $callback): IRoute {
         return $this->create('OPTION', $path, $callback);
     }

@@ -73,6 +73,10 @@ class Core implements ICore {
         return $this->router()->delete($route, $callback);
     }
 
+    public function patch($route, $callback): IRoute {
+        return $this->router()->patch($route, $callback);
+    }
+
     public function option($route, $callback): IRoute {
         return $this->router()->option($route, $callback);
     }

@@ -14,5 +14,6 @@ interface IRouter
     public function post(string $path, $callback): IRoute;
     public function put(string $path, $callback): IRoute;
     public function delete(string $path, $callback): IRoute;
+    public function patch(string $path, $callback): IRoute;
     public function option(string $path, $callback): IRoute;
 }

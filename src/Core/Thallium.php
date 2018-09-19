@@ -3,6 +3,8 @@ namespace PolarizedIons\Thallium\Core;
 
 use PolarizedIons\Thallium\Core\Core;
 use PolarizedIons\Thallium\Interfaces\ICore;
+use PolarizedIons\Thallium\Interfaces\IRoute;
+use PolarizedIons\Thallium\Interfaces\IRouter;
 
 if (!defined('THALLIUM')) exit(1);
 
@@ -32,23 +34,27 @@ class Thallium {
         return self::core()->router();
     }
 
-    public function get($route, $callback): IRoute {
+    public static function get($route, $callback): IRoute {
         return self::router()->get($route, $callback);
     }
 
-    public function post($route, $callback): IRoute {
+    public static function post($route, $callback): IRoute {
         return self::router()->post($route, $callback);
     }
 
-    public function put($route, $callback): IRoute {
+    public static function put($route, $callback): IRoute {
         return self::router()->put($route, $callback);
     }
 
-    public function delete($route, $callback): IRoute {
+    public static function delete($route, $callback): IRoute {
         return self::router()->delete($route, $callback);
     }
 
-    public function option($route, $callback): IRoute {
+    public static function patch($route, $callback): IRoute {
+        return self::router()->patch($route, $callback);
+    }
+
+    public static function option($route, $callback): IRoute {
         return self::router()->option($route, $callback);
     }
 }
