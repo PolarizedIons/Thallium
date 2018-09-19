@@ -6,6 +6,7 @@ use PolarizedIons\Thallium\Interfaces\ICore;
 use PolarizedIons\Thallium\Interfaces\IRoute;
 use PolarizedIons\Thallium\Interfaces\IRouter;
 
+
 if (!defined('THALLIUM')) exit(1);
 
 class Thallium {
@@ -20,13 +21,16 @@ class Thallium {
         return self::$core->fetch('core');
     }
 
-    public static function manage(string $key, $component) {
-        self::core()->manage($key, $component);
+    public static function store(string $key, $component) {
+        self::core()->store($key, $component);
     }
 
-    public static function fetch($key)
-    {
+    public static function fetch($key) {
         return self::core()->fetch($key);
+    }
+
+    public static function react() {
+        self::core()->react();
     }
 
 
@@ -56,5 +60,9 @@ class Thallium {
 
     public static function option($route, $callback): IRoute {
         return self::router()->option($route, $callback);
+    }
+
+    public static function all($route, $callback): IRoute {
+        return self::router()->all($route, $callback);
     }
 }

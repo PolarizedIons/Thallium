@@ -4,6 +4,7 @@ namespace PolarizedIons\Thallium\Routes;
 use \PolarizedIons\Thallium\Core\Thallium;
 use \PolarizedIons\Thallium\Interfaces\IRoute;
 use \PolarizedIons\Thallium\Interfaces\IRequest;
+use \PolarizedIons\Thallium\Interfaces\IResponse;
 use \PolarizedIons\Thallium\Routes\Paths\Path;
 
 
@@ -22,10 +23,10 @@ class Route implements IRoute {
     }
 
     public function matches(IRequest $request): bool {
-        return $request->method === $this->method && $this->path->match($request);
+        return ($this->method === '*' || $request->method === $this->method) && $this->path->match($request);
     }
 
-    public function run(IRequest $request) {
-        ($this->exec)($request, Thallium::fetch('response'));
+    public function run(IRequest $request, IResponse $response) {
+        ($this->exec)($request, $response);
     }
 }

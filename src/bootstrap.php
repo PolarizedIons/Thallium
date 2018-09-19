@@ -14,8 +14,6 @@ else {
     ini_set('log_errors', 'On');
 }
 
-require_once THALLIUM_ROOT . '/vendor/autoload.php';
-
 /**
  * Error handling lib
  */

@@ -13,24 +13,24 @@ if (!defined('THALLIUM')) exit(1);
 
 class Core implements ICore {
     private $components;
+    private static $bootstrapped = false;
 
     public function __construct()
     {
-        $this->components = array();
-
-        $this->manage('core', $this);
-        $this->manage('router', function() { return new Router; });
-        $this->manage('request', function() { return Request::createFromGlobals(); });
-        $this->manage('response', function() { return new Response; });
-    }
-
-    public function manage(string $key, $component) {
-        if (! is_callable($component)) {
-            $component = function() use($component) {
-                return $component;
-            };
+        if (! $this::$bootstrapped) {
+            require_once(THALLIUM_SRC . '/bootstrap.php');
+            $this::$bootstrapped = true;
         }
 
+        $this->components = array();
+
+        $this->store('core', $this);
+        $this->store('router', function() { return new Router; });
+        $this->store('request', function() { return Request::createFromGlobals(); });
+        $this->store('response', function() { return new Response; });
+    }
+
+    public function store(string $key, $component) {
         $this->components[$key] = $component;
     }
 
@@ -47,8 +47,10 @@ class Core implements ICore {
         return $component;
     }
 
-    public function run() {
-        $this->router()->matchRoute($this->fetch('request'));
+    public function react() {
+        $request = $this->fetch('request');
+        $response = $this->fetch('response');
+        $this->router()->routeRequest($request, $response);
     }
 
 
@@ -81,4 +83,7 @@ class Core implements ICore {
         return $this->router()->option($route, $callback);
     }
 
+    public function all($route, $callback): IRoute {
+        return $this->router()->all($route, $callback);
+    }
 }

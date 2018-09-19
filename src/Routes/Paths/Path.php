@@ -24,7 +24,7 @@ class Path {
 
     public function __construct(string $path) {
         $urlSegments = \array_filter(\explode('/', $path));
-        $this->fullPath = \implode('/', $urlSegments) ?: "/";
+        $this->fullPath = \implode('/', $urlSegments) ?: '/';
 
         $this->segments = array();
         foreach($urlSegments as $segment) {
@@ -41,7 +41,11 @@ class Path {
             if ($matches[3] === null) {
                 $matches[3] = [];
             }
-            
+            else {
+                $optionPairs = \explode(',', $matches[3]);
+                $matches[3] = array_map(function ($el) { return \explode('=', $el); }, $optionPairs);
+            }
+
             array_push($this->segments, $this->createArgParser($matches[1], $matches[2], $matches[3]));
         }
 
@@ -54,7 +58,7 @@ class Path {
         if ($type === "*") {
             $type = $this::$ARG_DEFAULT_PARSER;
         }
-        
+
         if (! array_key_exists($type, $this::$ARG_PARSER)) {
             return null;
         }
@@ -65,12 +69,12 @@ class Path {
     }
 
     public function match(IRequest $request): bool {
-        if ($this->fullPath === "/" && $request->path === "/") {
+        if ($this->fullPath === '/' && $request->path === '/') {
             return true;
         }
 
         $path = \array_values(\array_filter(\explode('/', $request->path)));
-        
+
         // TODO: this is kinda hacky
         if (sizeof($path) != sizeof($this->segments)) {
             return false;
@@ -80,18 +84,18 @@ class Path {
         for ($i = 0; $i < sizeof($path); $i++) {
             $arg = $this->segments[$i];
             $match = $arg->match($path[$i]);
-            
+
             if ($match === null) {
                 return false;
             }
-            if (!$match[0]) {
+            if (! $match[0]) {
                 continue;
             }
 
             $params[$match[0]] = $match[1];
         }
 
-        $request->params = $params;
+        $request->params = \array_merge($request->params, $params);
         return true;
     }
 }

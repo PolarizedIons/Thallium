@@ -3,6 +3,7 @@ namespace PolarizedIons\Thallium\Routes;
 
 use PolarizedIons\Thallium\Interfaces\IRouter;
 use PolarizedIons\Thallium\Interfaces\IRequest;
+use PolarizedIons\Thallium\Interfaces\IResponse;
 use PolarizedIons\Thallium\Interfaces\IRoute;
 
 
@@ -17,10 +18,10 @@ class Router implements IRouter {
         return $route;
     }
 
-    public function matchRoute(IRequest $request) {
+    public function routeRequest(IRequest $request, IResponse $response) {
         foreach ($this->routes as $route) {
             if ($route->matches($request)) {
-                $route->run($request);
+                $route->run($request, $response);
                 return;
             }
         }
@@ -50,5 +51,9 @@ class Router implements IRouter {
 
     public function option(string $path, $callback): IRoute {
         return $this->create('OPTION', $path, $callback);
+    }
+
+    public function all(string $path, $callback): IRoute {
+        return $this->create('*', $path, $callback);
     }
 }
