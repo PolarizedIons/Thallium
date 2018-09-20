@@ -19,11 +19,20 @@ $app->get('/about', function($req, $res) {
 });
 
 $app->get('/hello/{name}', function($req, $res) {
-    echo 'Hello ' . $req->params['name'];
+    echo 'Hello ' . $req->getParam('name');
 });
 
 Thallium::get('/item/{num#number}', function($req, $res) {
-    echo 'Item ' . $req->params['num'];
+    var_dump($req);
+    echo 'Item ' . $req->getParam('num');
+});
+
+Thallium::all('/bodytest', function($req, $res) {
+    var_dump($req);
+    var_dump($req->getBody());
+    // var_dump($_POST);
+    // var_dump(file_get_contents('php://input'));
+    echo 'SUCCESS!';
 });
 
 $app->react();

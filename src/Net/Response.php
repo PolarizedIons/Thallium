@@ -1,5 +1,5 @@
 <?php
-namespace Thallium\Routes;
+namespace Thallium\Net;
 
 use \Thallium\Interfaces\IResponse;
 

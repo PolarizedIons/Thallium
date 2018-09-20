@@ -2,8 +2,8 @@
 namespace Thallium\Core;
 
 use Thallium\Routes\Router;
-use Thallium\Routes\Request;
-use Thallium\Routes\Response;
+use Thallium\Net\Request;
+use Thallium\Net\Response;
 use Thallium\Interfaces\ICore;
 use Thallium\Interfaces\IRouter;
 use Thallium\Interfaces\IRoute;
@@ -12,8 +12,8 @@ use Thallium\Interfaces\IRoute;
 if (!defined('THALLIUM')) exit(1);
 
 class Core implements ICore {
-    private $components;
     private static $bootstrapped = false;
+    private $components;
 
     public function __construct()
     {

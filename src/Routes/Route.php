@@ -23,7 +23,7 @@ class Route implements IRoute {
     }
 
     public function matches(IRequest $request): bool {
-        return ($this->method === '*' || $request->method === $this->method) && $this->path->match($request);
+        return ($this->method === '*' || $request->getMethod() === $this->method) && $this->path->match($request);
     }
 
     public function run(IRequest $request, IResponse $response) {

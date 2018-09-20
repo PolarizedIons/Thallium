@@ -69,11 +69,11 @@ class Path {
     }
 
     public function match(IRequest $request): bool {
-        if ($this->fullPath === '/' && $request->path === '/') {
+        if ($this->fullPath === '/' && $request->getPath() === '/') {
             return true;
         }
 
-        $path = \array_values(\array_filter(\explode('/', $request->path)));
+        $path = \array_values(\array_filter(\explode('/', $request->getPath())));
 
         // TODO: this is kinda hacky
         if (sizeof($path) != sizeof($this->segments)) {
@@ -95,7 +95,7 @@ class Path {
             $params[$match[0]] = $match[1];
         }
 
-        $request->params = \array_merge($request->params, $params);
+        $request->addParams($params);
         return true;
     }
 }
