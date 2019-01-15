@@ -4,7 +4,7 @@ namespace Thallium\Routes\Paths;
 
 if (!defined('THALLIUM')) exit(1);
 
-abstract class ArgParser {
+abstract class PathArgument {
     protected $name;
     protected $type;
     protected $options;
