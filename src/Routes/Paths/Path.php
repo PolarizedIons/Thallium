@@ -22,46 +22,7 @@ class Path {
         $this->pathParser = new PathParser($urlSegments);
 
         $this->segments = $this->pathParser->getSegments();
-        // foreach($urlSegments as $segment) {
-        //     $matches = array();
-        //     if (preg_match_all($this::$ARG_REGEX, $segment, $matches, PREG_UNMATCHED_AS_NULL) === 0) {
-        //         array_push($this->segments, $this->createArgParser($segment, 'static'));
-        //         continue;
-        //     }
-
-        //     $matches = array_map(function ($el) { return $el[0]; }, $matches);
-        //     if ($matches[2] === null) {
-        //         $matches[2] = "*";
-        //     }
-        //     if ($matches[3] === null) {
-        //         $matches[3] = [];
-        //     }
-        //     else {
-        //         $optionPairs = \explode(',', $matches[3]);
-        //         $matches[3] = array_map(function ($el) { return \explode('=', $el); }, $optionPairs);
-        //     }
-
-        //     array_push($this->segments, $this->createArgParser($matches[1], $matches[2], $matches[3]));
-        // }
-
-        // if (! $this->segments) {
-        //     $this->segments = [$this->createArgParser('', 'static')];
-        // }
     }
-
-    // private function createArgParser(string $name, string $type = '*', array $options = []) {
-    //     if ($type === "*") {
-    //         $type = $this::$ARG_DEFAULT_PARSER;
-    //     }
-
-    //     if (! array_key_exists($type, $this::$ARG_PARSER)) {
-    //         return null;
-    //     }
-
-    //     $cls = $this::$ARG_PARSER[$type];
-    //     $r = new \ReflectionClass($cls);
-    //     return $r->newInstanceArgs([$name, $type, $options]);
-    // }
 
     public function match(IRequest $request): bool {
         if ($this->fullPath === '/' && $request->getPath() === '/') {

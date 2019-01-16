@@ -111,7 +111,6 @@ class PathParser {
             throw new \Exception("'$type' is not a valid argument type");
         }
 
-        echo "Parsed::: Name: $name, Type: $type, Options: " . \implode(',', $options)."<br/>";
         return $this->createArgument($name, $type, $options);
     }
 
