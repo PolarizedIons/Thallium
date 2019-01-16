@@ -11,5 +11,7 @@ interface ICore
     public function react();
 
     public function router(): IRouter;
+    public function errorRouter(): IErrorRouter;
+
     public function get($route, $callback): IRoute;
 }

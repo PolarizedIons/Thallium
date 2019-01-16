@@ -2,10 +2,12 @@
 namespace Thallium\Core;
 
 use Thallium\Routes\Router;
+use Thallium\Routes\ErrorRouter;
 use Thallium\Net\Request;
 use Thallium\Net\Response;
 use Thallium\Interfaces\ICore;
 use Thallium\Interfaces\IRouter;
+use Thallium\Interfaces\IErrorRouter;
 use Thallium\Interfaces\IRoute;
 
 
@@ -28,6 +30,7 @@ class Core implements ICore {
         $this->store('router', function() { return new Router; });
         $this->store('request', function() { return Request::createFromGlobals(); });
         $this->store('response', function() { return new Response; });
+        $this->store('error_router', function() { return new ErrorRouter; });
     }
 
     public function store(string $key, $component) {
@@ -49,10 +52,15 @@ class Core implements ICore {
 
     public function react() {
         \ob_start();
-        $request = $this->fetch('request');
-        $response = $this->fetch('response');
-        $this->router()->routeRequest($request, $response);
-        \ob_end_clean();
+        try {
+            $request = $this->fetch('request');
+            $response = $this->fetch('response');
+            $this->router()->routeRequest($request, $response);
+            \ob_end_clean();
+        }
+        catch (Exception $e) {
+            \ob_end_flush();
+        }
         \ob_start();
         $response->sendHeaders();
         echo $response->sendBody();
@@ -60,10 +68,14 @@ class Core implements ICore {
     }
 
 
-
     public function router(): IRouter {
         return $this->fetch('router');
     }
+
+    public function errorRouter(): IErrorRouter {
+        return $this->fetch('error_router');
+    }
+
 
     public function get($route, $callback): IRoute {
         return $this->router()->get($route, $callback);
