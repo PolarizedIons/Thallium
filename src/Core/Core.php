@@ -48,9 +48,15 @@ class Core implements ICore {
     }
 
     public function react() {
+        \ob_start();
         $request = $this->fetch('request');
         $response = $this->fetch('response');
         $this->router()->routeRequest($request, $response);
+        \ob_end_clean();
+        \ob_start();
+        $response->sendHeaders();
+        echo $response->sendBody();
+        \ob_end_flush();
     }
 
 

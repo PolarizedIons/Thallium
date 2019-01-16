@@ -11,7 +11,8 @@ use \Thallium\Core\Thallium;
 $app = Thallium::init();
 
 $app->get('/', function($req, $res) {
-    echo 'hello index!';
+    $res->send( 'hello index!<br>' );
+    $res->render_file(__DIR__ . '/' . 'testpage.php');
 });
 
 $app->get('/about', function($req, $res) {
