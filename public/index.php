@@ -16,24 +16,24 @@ $app->get('/', function($req, $res) {
 });
 
 $app->get('/about', function($req, $res) {
-    echo 'hello about!';
+    $res->send(  'hello about!' );
 });
 
 $app->get('/hello/{name}', function($req, $res) {
-    echo 'Hello ' . $req->getParam('name');
+    $res->send(  'Hello ' . $req->getParam('name') );
 });
 
 Thallium::get('/item/{num#number}', function($req, $res) {
-    var_dump($req);
-    echo 'Item ' . $req->getParam('num');
+    $res->send( var_dump($req) );
+    $res->send(  'Item ' . $req->getParam('num') );
 });
 
 Thallium::all('/bodytest', function($req, $res) {
-    var_dump($req);
-    var_dump($req->getBody());
+    $res->send( '' . var_dump($req) );
+    $res->send( ''. var_dump($req->getBody()) );
     // var_dump($_POST);
     // var_dump(file_get_contents('php://input'));
-    echo 'SUCCESS!';
+    $res->send( 'SUCCESS!' );
 });
 
 $app->react();

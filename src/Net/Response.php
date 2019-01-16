@@ -24,7 +24,7 @@ class Response implements IResponse {
     }
 
     public function send(string $value) {
-        $this->body .= $value;
+            $this->body .= $value;
     }
 
     public function render_file(string $template_path) {

@@ -34,6 +34,10 @@ class PathParser {
         $type = '';
         $options = '';
 
+        // Parse the arguments, each by using a "string reader" approach.
+        // with the special case of if it doesn't start with a '{', it is a
+        // static type argument
+
         // {id#number:foo=bar,bar=baz}
         // Phases of parsing; 0 = name, 1 = type, 2 = options
         $phase = 0;
@@ -42,6 +46,7 @@ class PathParser {
         for (; $i < \strlen($arg); $i++) {
             $char = \substr($arg, $i, 1);
 
+            // Parsing arg id
             if ($phase === 0) {
                 if ($i === 0) {
                     if ($char === '{') {
@@ -70,6 +75,8 @@ class PathParser {
 
                 $name .= $char;
             }
+
+            // Parsing arg type
             else if ($phase === 1) {
                 if ($char === ':') {
                     $phase = 2;
@@ -84,6 +91,8 @@ class PathParser {
 
                 $type .= $char;
             }
+
+            // Parsing arg options
             else if ($phase === 2) {
                 if ($char === '}') {
                     $endedProperly = true;
@@ -94,11 +103,15 @@ class PathParser {
             }
         }
 
+        // Make sure the argument has a type
         if ($type === '') {
             $type = $this::$ARG_DEFAULT_PARSER;
         }
+
+        // Put the options into an array
         $options = explode(',', $options);
 
+        // Error checking
         $charsLeft = \strlen($arg) - $i;
         if ($charsLeft !== 0) {
             $left = \substr($arg, $i);
@@ -111,6 +124,7 @@ class PathParser {
             throw new \Exception("'$type' is not a valid argument type");
         }
 
+        // We did it - create a argument class of type
         return $this->createArgument($name, $type, $options);
     }
 

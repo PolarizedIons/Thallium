@@ -8,8 +8,6 @@ use \Thallium\Routes\Paths\PathParser;
 if (!defined('THALLIUM')) exit(1);
 
 class Path {
-    private static $ARG_REGEX = "/{([a-zA-Z]+)(?:#([[a-zA-Z]+)(?::([a-zA-Z1-9,=]+))?)?}/";
-
     private $fullPath;
     private $segments;
     private $pathParser;
@@ -25,13 +23,16 @@ class Path {
     }
 
     public function match(IRequest $request): bool {
+        // If the root was requested & this is the root path, return true.
         if ($this->fullPath === '/' && $request->getPath() === '/') {
             return true;
         }
 
+        // Get rid of any 'empty' segments in the requested path
         $path = \array_values(\array_filter(\explode('/', $request->getPath())));
 
-        // TODO: this is kinda hacky
+        // If the amount of segments in the requested path doesn't math this one,
+        // we know it won't match
         if (sizeof($path) != sizeof($this->segments)) {
             return false;
         }
@@ -41,6 +42,7 @@ class Path {
             $arg = $this->segments[$i];
             $match = $arg->match($path[$i]);
 
+            // Argument didn't match, this is not the path they're looking for.
             if ($match === null) {
                 return false;
             }
@@ -48,10 +50,14 @@ class Path {
                 continue;
             }
 
+            // Store the 'name' and captured value of the arguments in the path
             $params[$match[0]] = $match[1];
         }
 
+        // Save the arguments from above in the request
         $request->addParams($params);
+
+        // We found our match
         return true;
     }
 }
