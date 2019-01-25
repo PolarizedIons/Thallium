@@ -55,6 +55,7 @@ class Core implements ICore {
         \ob_end_clean();
         \ob_start();
         $response->sendHeaders();
+        $response->render();
         echo $response->sendBody();
         \ob_end_flush();
     }
