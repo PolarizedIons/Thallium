@@ -5,12 +5,15 @@ use Thallium\Core\Core;
 use Thallium\Interfaces\ICore;
 use Thallium\Interfaces\IRoute;
 use Thallium\Interfaces\IRouter;
+use Thallium\Interfaces\IErrorRouter;
 
 
 if (!defined('THALLIUM')) exit(1);
 
 class Thallium {
     private static $core;
+
+    public static $version = "0.0.1";
 
     public static function init(): ICore {
         self::$core = new Core;
@@ -36,6 +39,10 @@ class Thallium {
 
     public static function router(): IRouter {
         return self::core()->router();
+    }
+
+    public static function errorRouter(): IErrorRouter {
+        return self::core()->errorRouter();
     }
 
     public static function get($route, $callback): IRoute {

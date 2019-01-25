@@ -1,6 +1,7 @@
 <?php
 namespace Thallium\Routes;
 
+use Thallium\Core\Thallium;
 use Thallium\Interfaces\IRouter;
 use Thallium\Interfaces\IRequest;
 use Thallium\Interfaces\IResponse;
@@ -26,7 +27,7 @@ class Router implements IRouter {
             }
         }
 
-        echo '404'; // TODO:
+        Thallium::errorRouter()->show(404, $request, $response);
     }
 
     public function get(string $path, $callback): IRoute {
